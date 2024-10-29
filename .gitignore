@@ -1,0 +1,11 @@
+./adminwebsite/node_modules
+./adminwebsite/dist
+
+./master/node_modules
+./master/dist
+
+./slave/node_modules
+./slave/dist
+
+./userwebsite/node_modules
+./userwebsite/dist
