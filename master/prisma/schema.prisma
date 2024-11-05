@@ -42,10 +42,12 @@ model submissions {
   language String
   questionId String
   userId String
-  passedcases String
-  failedcases String
-  totalcases String
-  correct Boolean
+  passedcases String?
+  failedcases String?
+  totalcases String?
+  correct Boolean?
+  completed Boolean @default(false) 
+  createdAt DateTime @default(now())
   question questions @relation(fields: [questionId], references: [id])
   user user @relation(fields: [userId], references: [id])
 }
