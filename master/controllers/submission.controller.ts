@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { addSubmissionValidator, editSubmissionValidator } from '../validators/submission.validator';
 import prisma from '../db';
+import { redisClient } from '..';
 export async function AddSubmission(req: Request, res: Response) {
     try {
         const body = req.body;
@@ -12,20 +13,32 @@ export async function AddSubmission(req: Request, res: Response) {
             });
             return
         }
+
         await prisma.submissions.create({
             data: {
                 code: check.data.code,
                 language: check.data.language,
-                questionId: req.params.id,
+                questionId: check.data.questionId,
                 userId: req.body.id
             }
         })
+        const testcases = await prisma.testcases.findMany({
+            where: {
+                questionId: check.data.questionId
+            }
+        })
+        redisClient.lPush("submissions", JSON.stringify({
+            code: check.data.code,
+            langId: 63,
+            testcases
+        }))
         res.status(200).json({
             success: true,
             message: "Submission added successfully"
         });
         return
     } catch (error) {
+
         res.status(500).json({
             success: false,
             message: error
