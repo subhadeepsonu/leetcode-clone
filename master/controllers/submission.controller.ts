@@ -13,8 +13,7 @@ export async function AddSubmission(req: Request, res: Response) {
             });
             return
         }
-
-        await prisma.submissions.create({
+        const submission = await prisma.submissions.create({
             data: {
                 code: check.data.code,
                 language: check.data.language,
@@ -28,13 +27,16 @@ export async function AddSubmission(req: Request, res: Response) {
             }
         })
         redisClient.lPush("submissions", JSON.stringify({
+            userId: submission.userId,
+            submissionId: submission.id,
             code: check.data.code,
             langId: 63,
             testcases
         }))
         res.status(200).json({
             success: true,
-            message: "Submission added successfully"
+            message: "Submission added successfully",
+            data: submission.id
         });
         return
     } catch (error) {
@@ -57,11 +59,18 @@ export async function GetSubmission(req: Request, res: Response) {
             });
             return
         }
-        const submission = await prisma.submissions.findMany({
+        const submission = await prisma.submissions.findUnique({
             where: {
                 id: id
             }
         });
+        if (!submission) {
+            res.status(400).json({
+                success: false,
+                message: "Submission not found"
+            });
+            return
+        }
         res.status(200).json({
             success: true,
             message: "Submission fetched successfully",
@@ -80,17 +89,45 @@ export async function GetSubmission(req: Request, res: Response) {
 export async function UpdateSubmission(req: Request, res: Response) {
     try {
         const body = req.body;
+        const id = req.params.id;
+        if (!id) {
+            res.status(400).json({
+                success: false,
+                message: "id required"
+            });
+            return
+        }
         const check = editSubmissionValidator.safeParse(body);
         if (!check.success) {
             res.status(400).json({
                 success: false,
-                message: check.error
+                message: check.error.message
+            });
+            return
+        }
+        const submission = await prisma.submissions.findUnique({
+            where: {
+                id: id
+            }
+        })
+        if (!submission) {
+            res.status(400).json({
+                success: false,
+                message: "submission not found"
+            });
+            return
+        }
+        if (submission.userId != check.data.userId) {
+
+            res.status(400).json({
+                success: false,
+                message: "Not authorized"
             });
             return
         }
         await prisma.submissions.update({
             where: {
-                id: req.params.id
+                id: id
             },
             data: {
                 failedcases: check.data.failedcases,
@@ -105,10 +142,10 @@ export async function UpdateSubmission(req: Request, res: Response) {
             message: "Submission updated successfully"
         });
         return
-    } catch (error) {
+    } catch (error: any) {
         res.status(500).json({
             success: false,
-            message: error
+            message: error.message
         });
         return
     }

@@ -5,8 +5,12 @@ import { questionRouter } from "./routes/question.route"
 import { submissionRouter } from "./routes/submission.route"
 import { testCaseRouter } from "./routes/testcase.route"
 import { createClient } from "redis"
+import cors from "cors"
 const app = express()
 app.use(express.json())
+app.use(cors({
+    origin: "*"
+}))
 const redisClient = createClient()
 redisClient.connect()
 app.use("/api/v1", userRouter)
