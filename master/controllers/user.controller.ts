@@ -20,7 +20,7 @@ export async function UserLogin(req: Request, res: Response) {
             }
         });
         if (!user) {
-            res.status(400).json({
+            res.json({
                 success: false,
                 message: "User not found"
             });
@@ -29,7 +29,7 @@ export async function UserLogin(req: Request, res: Response) {
         const checkPassword = await bcrypt.compare(check.data.password, user.password);
 
         if (!checkPassword) {
-            res.status(400).json({
+            res.json({
                 success: false,
                 message: "Password is incorrect"
             });
@@ -37,14 +37,14 @@ export async function UserLogin(req: Request, res: Response) {
         }
 
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!);
-        res.status(200).json({
+        res.json({
             success: true,
             message: "User logged in successfully",
             data: token
         });
         return
     } catch (error) {
-        res.status(500).json({
+        res.json({
             success: false,
             message: error
         });
@@ -58,7 +58,7 @@ export async function UserRegister(req: Request, res: Response) {
         const body = req.body;
         const check = userRegisterValidator.safeParse(body);
         if (!check.success) {
-            res.status(400).json({
+            res.json({
                 success: false,
                 message: check.error
             });
@@ -71,7 +71,7 @@ export async function UserRegister(req: Request, res: Response) {
         });
 
         if (checkUser) {
-            res.status(400).json({
+            res.json({
                 success: false,
                 message: "User already exists"
             });
@@ -87,14 +87,14 @@ export async function UserRegister(req: Request, res: Response) {
             }
         })
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!);
-        res.status(200).json({
+        res.json({
             success: true,
             message: "User registered successfully",
             data: token
         });
         return
     } catch (error) {
-        res.status(500).json({
+        res.json({
             success: false,
             message: error
         });

@@ -7,21 +7,28 @@ import Profile from './pages/profile'
 import Login from './pages/login'
 import Register from './pages/register'
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import UserRouteProctection from './utils/protectPage'
+import ProtectLogin from './utils/ProtectLogin'
+import { Toaster } from 'sonner'
+import Navbar from './components/Navbar'
 function App() {
   const queryClient = new QueryClient()
   return (
     <QueryClientProvider client={queryClient} >
+      <Toaster richColors />
       <BrowserRouter>
+        <Navbar />
         <Routes>
-          <Route path='/' element={<CodeEditor />} />
-          <Route path='/questions' element={<Question />} />
-          <Route path='/questions/:id' element={<QuestionById />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
+
+          <Route path='/' element={<ProtectLogin><CodeEditor /></ProtectLogin>} />
+          <Route path='/questions' element={<UserRouteProctection><Question /></UserRouteProctection>} />
+          <Route path='/questions/:id' element={<UserRouteProctection><QuestionById /></UserRouteProctection>} />
+          <Route path='/profile' element={<UserRouteProctection><Profile /></UserRouteProctection>} />
+          <Route path='/login' element={<ProtectLogin><Login /></ProtectLogin>} />
+          <Route path='/register' element={<ProtectLogin><Register /></ProtectLogin>} />
         </Routes>
       </BrowserRouter >
-    </QueryClientProvider>
+    </QueryClientProvider >
   )
 }
 

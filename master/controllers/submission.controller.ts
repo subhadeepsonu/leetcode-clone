@@ -2,6 +2,41 @@ import { Request, Response } from 'express';
 import { addSubmissionValidator, editSubmissionValidator } from '../validators/submission.validator';
 import prisma from '../db';
 import { redisClient } from '..';
+export async function GetAllSubmissions(req: Request, res: Response) {
+    try {
+        const { id } = req.query
+        if (!id) {
+            res.status(400).json({
+                success: false,
+                message: "id is required"
+            });
+            return
+        }
+        const submissions = await prisma.submissions.findMany({
+            where: {
+                userId: req.body.id,
+                questionId: id.toString(),
+                completed: true
+            },
+            orderBy: {
+                createdAt: "desc"
+            }
+        });
+        res.status(200).json({
+            success: true,
+            message: "Submissions fetched successfully",
+            data: submissions
+        });
+        return
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error
+        });
+        return
+    }
+}
 export async function AddSubmission(req: Request, res: Response) {
     try {
         const body = req.body;

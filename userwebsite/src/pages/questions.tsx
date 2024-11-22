@@ -6,7 +6,11 @@ export default function Question() {
     const queryQuestions = useQuery({
         queryKey: ['questions'],
         queryFn: async () => {
-            const resposne = await axios.get('http://localhost:3000/api/v1/question')
+            const resposne = await axios.get('http://localhost:3000/api/v1/question', {
+                headers: {
+                    Authorization: localStorage.getItem('token')
+                }
+            })
             return resposne.data
         }
     })
@@ -22,7 +26,7 @@ export default function Question() {
         return <div className="w-full min-h-screen bg-black text-white flex-col flex justify-start gap-5 pt-20 items-center">
 
             {queryQuestions.data.data.map((question: any) => {
-                return <QuestionCard key={question.id} question={question.question} />
+                return <QuestionCard id={question.id} key={question.id} question={question.question} />
             })}
 
         </div>

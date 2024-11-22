@@ -10,6 +10,7 @@ export async function userMiddleware(req: Request, res: Response, next: NextFunc
             });
             return
         }
+
         const user: any = jwt.verify(token, process.env.JWT_SECRET!);
         if (!user) {
             res.status(400).json({
