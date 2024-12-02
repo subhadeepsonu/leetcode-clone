@@ -6,7 +6,7 @@ export default function ProtectLogin({ children }: { children: React.ReactNode }
     const navigate = useNavigate()
     useEffect(() => {
         if (token) {
-            navigate("/questions")
+            navigate("/")
         }
     }, [token])
     return <>{children}</>

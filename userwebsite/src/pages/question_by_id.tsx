@@ -67,8 +67,8 @@ export default function QuestionById() {
     }
     return <div className="w-full h-screen bg-black text-white  flex justify-center items-center pt-16">
         <button disabled={loading} onClick={handleSubmit} className="bg-blue-500 disabled:hover:cursor-not-allowed disabled:bg-blue-200 hover:bg-blue-700 text-white fixed bottom-5 right-5 font-bold py-2 px-4 rounded">{loading ? <AiOutlineLoading className="animate-spin text-black" /> : "submit"}</button>
-        <div className="w-2/5 h-full bg-cyan-200 text-black flex flex-col justify-center items-center">
-            <div className="w-full h-[8%] border-b-2 border-black">
+        <div className="w-2/5 h-full  text-black flex flex-col justify-center items-center">
+            <div className="w-full h-[8%] border-b-2 border-black bg-white">
                 <div className="w-full h-full flex justify-around items-center">
                     <button onClick={() => {
                         setTab("question")
@@ -78,7 +78,7 @@ export default function QuestionById() {
                     }} className={` w-[48%] h-5/6 p-2 rounded-lg   ${(tab === "submissions") ? "bg-black text-white" : "hover:bg-gray-500 hover:text-white bg-white "} transition-all`}>Submissions</button>
                 </div>
             </div>
-            {tab === "question" ? <div className="w-full flex justify-center items-center h-[92%]">
+            {tab === "question" ? <div className="w-full flex justify-center text-white items-center h-[92%]">
                 {QueryQuestionByid.data.data.question}
             </div> : null}
             {tab === "submissions" ? <div className="w-full h-[92%]">

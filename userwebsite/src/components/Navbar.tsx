@@ -7,8 +7,10 @@ export default function Navbar() {
     if (location.pathname === "/login" || location.pathname === "/register") {
         return null
     }
-    return <div className="w-full bg-black text-white flex justify-between items-center h-16 fixed top-0 left-0">
-        <div className="text-xl">UserWebsite</div>
+    return <div className="w-full bg-black text-white flex justify-between items-center h-16 fixed top-0 left-0 px-6">
+        <div onClick={() => {
+            navigate("/")
+        }} className="text-xl hover:cursor-pointer">UserWebsite</div>
         <div>
             {token ? <button onClick={() => {
                 localStorage.removeItem("token")

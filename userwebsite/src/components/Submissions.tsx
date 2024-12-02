@@ -26,7 +26,7 @@ export default function Submissions(props: {
             Error...
         </div>
     }
-    return <div className="w-full h-full flex-col flex justify-center items-center overflow-y-auto ">
+    return <div className="w-full h-full flex-col text-white flex justify-center  items-center overflow-y-auto ">
         {QuerySubmissions.data.data.map((submission: any) => {
             return <div onClick={() => {
                 props.SetCode(submission.code)

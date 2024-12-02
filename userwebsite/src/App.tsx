@@ -19,9 +19,7 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-
-          <Route path='/' element={<ProtectLogin><CodeEditor /></ProtectLogin>} />
-          <Route path='/questions' element={<UserRouteProctection><Question /></UserRouteProctection>} />
+          <Route path='/' element={<UserRouteProctection><Question /></UserRouteProctection>} />
           <Route path='/questions/:id' element={<UserRouteProctection><QuestionById /></UserRouteProctection>} />
           <Route path='/profile' element={<UserRouteProctection><Profile /></UserRouteProctection>} />
           <Route path='/login' element={<ProtectLogin><Login /></ProtectLogin>} />

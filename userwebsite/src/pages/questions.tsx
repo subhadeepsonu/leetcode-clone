@@ -23,10 +23,10 @@ export default function Question() {
             Error</div>
     }
     if (queryQuestions.data) {
-        return <div className="w-full min-h-screen bg-black text-white flex-col flex justify-start gap-5 pt-20 items-center">
-
-            {queryQuestions.data.data.map((question: any) => {
-                return <QuestionCard id={question.id} key={question.id} question={question.question} />
+        return <div className="w-full min-h-screen bg-black text-white flex-col flex justify-start  pt-20 items-center">
+            <QuestionCard difficulty="difficulty" num={0} id={""} question={"questions"} />
+            {queryQuestions.data.data.map((question: any, index: number) => {
+                return <QuestionCard difficulty={question.difficulty} num={index + 1} id={question.id} key={question.id} question={question.question} />
             })}
 
         </div>

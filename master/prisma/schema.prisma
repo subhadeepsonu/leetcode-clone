@@ -24,10 +24,16 @@ model admin {
 model questions {
   id String @id @default(uuid())
   question String
+  difficulty difficulty @default(easy)
   submissions submissions[]
   testcases testcases[]
 }
 
+enum difficulty {
+  easy
+  medium
+  hard
+}
 model testcases {
   id String @id @default(uuid())
   input String

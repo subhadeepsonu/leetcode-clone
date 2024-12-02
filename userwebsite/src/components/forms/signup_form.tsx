@@ -44,7 +44,7 @@ export default function SignUpForm() {
             if (data.success) {
                 localStorage.setItem("token", data.data)
                 toast.success("Registration successfull")
-                navigate("/questions")
+                navigate("/")
             }
             else {
                 toast.error(data.message)

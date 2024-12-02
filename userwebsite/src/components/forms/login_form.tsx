@@ -45,7 +45,7 @@ export default function LoginForm() {
                 console.log(data.data)
                 localStorage.setItem("token", data.data)
                 toast.success("Login Success")
-                navigate("/questions")
+                navigate("/")
             }
             else {
                 toast.error(data.message)
