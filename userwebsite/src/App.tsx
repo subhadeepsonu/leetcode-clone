@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
-import CodeEditor from './pages/Editor'
 import Question from './pages/questions'
 import QuestionById from './pages/question_by_id'
 import Profile from './pages/profile'

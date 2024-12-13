@@ -66,11 +66,11 @@ export default function QuestionById() {
         return <div className="w-full min-h-screen bg-black text-white flex-col flex justify-center items-center">
             Error</div>
     }
-    return <div className="w-full h-screen bg-zinc-900 text-white  flex justify-center items-center pt-16   ">
+    return <div className="w-full h-screen bg-neutral-900 text-white  flex justify-center items-center pt-16   ">
         <ResizablePanelGroup direction="horizontal">
-            <ResizablePanel defaultSize={40}>
+            <ResizablePanel defaultSize={30}>
                 <div className=" h-full  text-black flex flex-col justify-center items-center">
-                    <div className="w-full h-[8%] border-b-2 border-black bg-gray-700">
+                    <div className="w-full h-[8%] border-b-2 border-black bg-zinc-800">
                         <div className="w-full h-full flex justify-around items-center">
                             <button onClick={() => {
                                 setTab("question")
@@ -85,15 +85,26 @@ export default function QuestionById() {
                             <p className="text-2xl font-bold pt-5">{QueryQuestionByid.data.data.question}</p>
                             <p className="text-gray-200" >{QueryQuestionByid.data.data.description}</p>
                         </div>
-                        <div>
-                            <p className="text-xl font-semibold">Example 1</p>
-                            <p className="text-gray-200">Input: {QueryQuestionByid.data.data.sampleInput1}</p>
-                            <p className="text-gray-200">Output: {QueryQuestionByid.data.data.sampleOutput1}</p>
+                        <p className="text-xl font-semibold">Examples:</p>
+                        <div className="border-2 w-full flex justify-between px-5 items-center bg-zinc-800 rounded-lg border-zinc-600 p-2">
+                            <div className="flex justify-center items-center  gap-2">
+                                <p className=" ">Sample Input:</p>
+                                <p className="text-gray-200"> {QueryQuestionByid.data.data.sampleInput1}</p>
+                            </div>
+                            <div className="flex justify-center items-center  gap-2">
+                                <p className=" ">Sample Output:</p>
+                                <p className="text-gray-200">{QueryQuestionByid.data.data.sampleOutput1}</p>
+                            </div>
                         </div>
-                        <div>
-                            <p className="text-xl font-semibold">Example 2</p>
-                            <p className="text-gray-200">Input: {QueryQuestionByid.data.data.sampleInput2}</p>
-                            <p className="text-gray-200">Output: {QueryQuestionByid.data.data.sampleOutput2}</p>
+                        <div className="border-2 w-full flex justify-between px-5 items-center bg-zinc-800 rounded-lg border-zinc-600 p-2">
+                            <div className="flex justify-center items-center  gap-2">
+                                <p className=" ">Sample Input:</p>
+                                <p className="text-gray-200"> {QueryQuestionByid.data.data.sampleInput2}</p>
+                            </div>
+                            <div className="flex justify-center items-center  gap-2">
+                                <p className=" ">Sample Output:</p>
+                                <p className="text-gray-200">{QueryQuestionByid.data.data.sampleOutput2}</p>
+                            </div>
                         </div>
 
                     </div> : null}
@@ -102,8 +113,8 @@ export default function QuestionById() {
                     </div> : null}
                 </div>
             </ResizablePanel>
-            <ResizableHandle className="border-2 px-[2px] bg-black" withHandle />
-            <ResizablePanel defaultSize={60}>
+            <ResizableHandle className=" px-[2px] bg-black" withHandle />
+            <ResizablePanel defaultSize={70}>
                 <ResizablePanelGroup direction="vertical">
                     <ResizablePanel defaultSize={70}>
                         <div className="h-full w-full">
@@ -112,9 +123,9 @@ export default function QuestionById() {
                             }} defaultLanguage="javascript" theme={"vs-dark"} />
                         </div>
                     </ResizablePanel>
-                    <ResizableHandle className="border-2 py-[2px] bg-black" withHandle />
+                    <ResizableHandle className=" py-[2px] bg-black" withHandle />
                     <ResizablePanel defaultSize={30}>
-                        <div className="h-full w-full flex justify-start items-center bg-zinc-900 px-5">
+                        <div className="h-full w-full flex justify-start items-center bg-neutral-900 px-5">
                             {submit ? <div className="flex flex-col  justify-between h-full py-5 items-start">
                                 <h1>Correct : {submit.passedcases} ✅</h1>
                                 <h1>Incorrect : {submit.failedcases} ❌</h1>
