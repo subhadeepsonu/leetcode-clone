@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
+import SubmissionCard from "./SubmissionCard"
 
 export default function Submissions(props: {
     id: string,
@@ -17,22 +18,23 @@ export default function Submissions(props: {
         }
     })
     if (QuerySubmissions.isLoading) {
-        return <div className="w-full h-full flex-col flex justify-center items-center">
+        return <div className="w-full h-full flex-col text-white flex justify-center items-center">
             Loading...
         </div>
     }
     if (QuerySubmissions.isError) {
-        return <div className="w-full h-full flex-col flex justify-center items-center">
+        return <div className="w-full h-full flex-col text-white flex justify-center items-center">
             Error...
         </div>
     }
-    return <div className="w-full h-full flex-col text-white flex justify-center  items-center overflow-y-auto ">
+    if (QuerySubmissions.data.data.length == 0) {
+        return <div className="w-full h-full flex-col flex text-white justify-center items-center">
+            No submissions yet
+        </div>
+    }
+    return <div className="w-full h-full flex-col text-white flex justify-start   items-center overflow-y-auto ">
         {QuerySubmissions.data.data.map((submission: any) => {
-            return <div onClick={() => {
-                props.SetCode(submission.code)
-            }} key={submission.id} className="w-full flex justify-center items-center p-2 hover:cursor-pointer">
-                {(submission.passedcases === submission.totalcases) ? "Accepted" : "Not Accepted"}
-            </div>
+            return <SubmissionCard key={submission.id} SetCode={props.SetCode} submission={submission} />
         })}
     </div>
 }

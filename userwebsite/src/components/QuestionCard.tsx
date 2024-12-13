@@ -1,26 +1,35 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { Badge } from "./ui/badge"
 
 export default function QuestionCard(props: {
     question: string,
     id: string,
     num: number,
-    difficulty: string
+    difficulty: string,
+    description: string
 }) {
     const navigate = useNavigate()
-    const [color, setColor] = useState("bg-zinc-800")
+
+    const [difficulty, setDifficulty] = useState("text-red-500")
     useEffect(() => {
-        if (props.num % 2 === 0) {
-            setColor("bg-zinc-800")
+        if (props.difficulty === "easy") {
+            setDifficulty("green")
+        } else if (props.difficulty === "medium") {
+            setDifficulty("yellow")
         } else {
-            setColor("bg-zinc-700")
+            setDifficulty("red")
         }
-    }, [props.num])
+    }
+        , [props.difficulty])
     return <div onClick={() => {
         navigate(`/questions/${props.id}`)
-    }} className={`border-b-2 border-zinc-800 h-10 flex justify-between px-3 items-center hover:cursor-pointer w-3/4 ${color}`} >
-        <p>{props.num}</p>
-        <h1>{props.question}</h1>
-        <p>{props.difficulty}</p>
+    }} className={`border-2 border-zinc-800 bg-zinc-900 h-24 shadow-md relative rounded-lg flex flex-col justify-around  items-start hover:cursor-pointer w-5/6 p-5 `} >
+        <div className="flex justify-start items-center ">
+            <p className="text-xl font-semibold">{props.num}</p>
+            <p className="text-xl font-semibold">. {props.question}</p>
+        </div>
+        <p className="text-gray-300">{props.description}.</p>
+        <Badge className={`absolute top-5 right-5  bg-${difficulty}-500 `}>{props.difficulty}</Badge>
     </div>
 }

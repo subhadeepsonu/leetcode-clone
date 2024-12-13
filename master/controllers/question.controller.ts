@@ -17,6 +17,11 @@ export async function AddQuestion(req: Request, res: Response) {
         await prisma.questions.create({
             data: {
                 question: check.data.question,
+                description: check.data.description,
+                sampleInput1: check.data.sampleInput1,
+                sampleInput2: check.data.sampleInput2,
+                sampleOutput1: check.data.sampleOutput1,
+                sampleOutput2: check.data.sampleOutput2
             }
         })
         res.status(200).json({
@@ -125,12 +130,19 @@ export async function EditQuestion(req: Request, res: Response) {
             });
             return
         }
+        await redisClient.del("questions")
+        await redisClient.del(`question:${check.data.questionId}`)
         await prisma.questions.update({
             where: {
                 id: check.data.questionId
             },
             data: {
-                question: check.data.question
+                question: check.data.question,
+                description: check.data.description,
+                sampleInput1: check.data.sampleInput1,
+                sampleInput2: check.data.sampleInput2,
+                sampleOutput1: check.data.sampleOutput1,
+                sampleOutput2: check.data.sampleOutput2
             }
         })
         res.status(200).json({

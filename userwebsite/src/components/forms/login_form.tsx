@@ -56,14 +56,15 @@ export default function LoginForm() {
 
 
     return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(() => MuatateLogin.mutate())} className="w-96 space-y-6  ">
+        <Form  {...form}>
+            <form onSubmit={form.handleSubmit(() => MuatateLogin.mutate())} className="w-96 space-y-6 border-2  p-6 backdrop-blur-sm bg-white/10 rounded-lg border-gray-400">
+                <p className="text-center text-3xl font-bold">Login</p>
                 <FormField
                     control={form.control}
                     name="email"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>email</FormLabel>
+                            <FormLabel>Email</FormLabel>
                             <FormControl>
                                 <Input placeholder="jhondoe@gmail.com" {...field} />
                             </FormControl>
@@ -76,7 +77,7 @@ export default function LoginForm() {
                     name="password"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>password</FormLabel>
+                            <FormLabel>Password</FormLabel>
                             <FormControl>
                                 <Input type="password" placeholder="not sure" {...field} />
                             </FormControl>
@@ -85,12 +86,12 @@ export default function LoginForm() {
                         </FormItem>
                     )}
                 />
-                <Button type="submit" className="w-full">{MuatateLogin.isPending ? <AiOutlineLoading className="animate-spin text-black" /> : "login"}</Button>
+                <Button variant={"secondary"} type="submit" className="w-full">{MuatateLogin.isPending ? <AiOutlineLoading className="animate-spin text-black" /> : "login"}</Button>
                 <Button type="submit" className="w-full bg-green-500 hover:bg-green-700" onClick={() => {
                     form.setValue("email", "guest@gmail.com")
                     form.setValue("password", "guest123")
                 }}>{MuatateLogin.isPending ? <AiOutlineLoading className="animate-spin text-black" /> : "Guest login"}</Button>
-                <Link to="/register" className=" block hover:underline">Dont have an account! Register</Link>
+                <Link to="/register" className=" block hover:underline text-center">Dont have an account! Register</Link>
             </form>
         </Form>
     )

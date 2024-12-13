@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button"
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -56,7 +55,8 @@ export default function SignUpForm() {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(() => MuatateSignup.mutate()
-            )} className="w-96 space-y-6">
+            )} className="w-96 space-y-6 border-2 p-6 backdrop-blur-sm bg-white/10 rounded-lg border-gray-400">
+                <p className="text-center text-3xl font-bold">Register</p>
                 <FormField
                     control={form.control}
                     name="username"
@@ -66,9 +66,6 @@ export default function SignUpForm() {
                             <FormControl>
                                 <Input placeholder="jhon doe" {...field} />
                             </FormControl>
-                            <FormDescription>
-                                This is your public display name.
-                            </FormDescription>
                             <FormMessage />
                         </FormItem>
                     )}
@@ -78,7 +75,7 @@ export default function SignUpForm() {
                     name="email"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>email</FormLabel>
+                            <FormLabel>Email</FormLabel>
                             <FormControl>
                                 <Input placeholder="jhondoe@gmail.com" {...field} />
                             </FormControl>
@@ -91,7 +88,7 @@ export default function SignUpForm() {
                     name="password"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>password</FormLabel>
+                            <FormLabel>Password</FormLabel>
                             <FormControl>
                                 <Input type="password" placeholder="not sure" {...field} />
                             </FormControl>
@@ -100,8 +97,8 @@ export default function SignUpForm() {
                         </FormItem>
                     )}
                 />
-                <Button type="submit" className="w-full">{MuatateSignup.isPending ? <AiOutlineLoading className="animate-spin text-black" /> : "Register"}</Button>
-                <Link to="/login" className=" block hover:underline">Already have an account! Login</Link>
+                <Button type="submit" variant={"secondary"} className="w-full">{MuatateSignup.isPending ? <AiOutlineLoading className="animate-spin text-black" /> : "Register"}</Button>
+                <Link to="/login" className=" block hover:underline text-center">Already have an account! Login</Link>
             </form>
         </Form>
     )

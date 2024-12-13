@@ -53,7 +53,7 @@ export default function CodeEditor() {
         <p>{loading}</p>
         <Editor onChange={(e) => {
             setCode(e!)
-        }} height="90vh" theme={"vs-dark"} className="border-2  text-red-100" width={"90vw"} defaultLanguage="javascript"  ></Editor>
+        }} height="90vh" theme={"vs-dark"} className="border-2" width={"90vw"} defaultLanguage="javascript"  ></Editor>
         <button disabled={loading} onClick={() => handleSubmit()} className="disabled:bg-gray-600 fixed bottom-5 right-5 px-3 py-1 bg-black rounded-sm text-white">{(loading) ? "..." : "submit"}</button>
     </div >
 }
