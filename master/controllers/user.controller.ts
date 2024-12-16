@@ -102,3 +102,61 @@ export async function UserRegister(req: Request, res: Response) {
     }
 
 }
+export async function UserProfile(req: Request, res: Response) {
+    try {
+        const response = await prisma.user.findUnique({
+            where: {
+                id: req.body.id
+            }
+        })
+        const submissions = await prisma.submissions.findMany({
+            where: {
+                userId: req.body.id
+            }
+        })
+        const correctsubmissions = await prisma.submissions.findMany({
+            where: {
+                userId: req.body.id,
+                correct: true
+            }
+        })
+        const correct = await prisma.submissions.groupBy({
+            by: ["questionId"],
+            where: {
+                userId: req.body.id,
+                correct: true
+            }
+        })
+        const recent = await prisma.submissions.findMany({
+            where: {
+                userId: req.body.id,
+            },
+            include: {
+                question: {
+                    select: {
+                        question: true
+                    }
+                }
+            },
+            take: 5
+        })
+        res.json({
+            success: true,
+            data: {
+                response,
+                submissions: submissions.length,
+                correct: correct.length,
+                correctsubmissions: correctsubmissions.length,
+                recent
+            },
+
+        })
+        return
+    } catch (error) {
+        res.json({
+            success: false,
+            message: error
+        });
+        return
+    }
+}

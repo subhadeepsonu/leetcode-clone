@@ -3,8 +3,6 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
@@ -22,10 +20,11 @@ export default function Navbar() {
         }} className="text-2xl hover:cursor-pointer font-semibold">MeetCode</div>
         <div>
             {token ? <DropdownMenu>
-                <DropdownMenuTrigger><Avatar>
-                    <AvatarImage src="https://github.com/shadcn.png" />
-                    <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
+                <DropdownMenuTrigger>
+                    <Avatar>
+                        <AvatarImage src="https://github.com/shadcn.png" />
+                        <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-fit">
                     <DropdownMenuItem onClick={() => {

@@ -87,7 +87,7 @@ export default function LoginForm() {
                     )}
                 />
                 <Button variant={"secondary"} type="submit" className="w-full">{MuatateLogin.isPending ? <AiOutlineLoading className="animate-spin text-black" /> : "login"}</Button>
-                <Button type="submit" className="w-full bg-green-500 hover:bg-green-700" onClick={() => {
+                <Button type="submit" className="w-full bg-green-600 hover:bg-green-800" onClick={() => {
                     form.setValue("email", "guest@gmail.com")
                     form.setValue("password", "guest123")
                 }}>{MuatateLogin.isPending ? <AiOutlineLoading className="animate-spin text-black" /> : "Guest login"}</Button>

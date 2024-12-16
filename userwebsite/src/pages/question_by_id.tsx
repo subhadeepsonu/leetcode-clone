@@ -74,10 +74,10 @@ export default function QuestionById() {
                         <div className="w-full h-full flex justify-around items-center">
                             <button onClick={() => {
                                 setTab("question")
-                            }} className={` w-[48%] h-5/6 rounded-lg   ${(tab === "question") ? "bg-gray-200  " : "hover:bg-zinc-500 text-white bg-zinc-900 "} transition-all`}>Question</button>
+                            }} className={` w-[48%] h-5/6 rounded-sm   ${(tab === "question") ? "bg-gray-200  " : "hover:bg-zinc-500 text-white bg-zinc-900 "} transition-all`}>Question</button>
                             <button onClick={() => {
                                 setTab("submissions")
-                            }} className={` w-[48%] h-5/6 p-2 rounded-lg   ${(tab === "submissions") ? "bg-gray-200 " : "hover:bg-zinc-500 text-white bg-zinc-900 "} transition-all`}>Submissions</button>
+                            }} className={` w-[48%] h-5/6 p-2 rounded-sm   ${(tab === "submissions") ? "bg-gray-200 " : "hover:bg-zinc-500 text-white bg-zinc-900 "} transition-all`}>Submissions</button>
                         </div>
                     </div>
                     {tab === "question" ? <div className="w-full flex space-y-4 flex-col justify-start text-white items-start h-[92%] px-5">
