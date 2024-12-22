@@ -17,14 +17,18 @@ export default function Profile() {
         }
     })
     if (QueryProfile.isLoading) {
-
+        return <div className="h-screen w-full bg-black flex justify-center items-center">
+            Loading...
+        </div>
     }
     if (QueryProfile.isError) {
-
+        return <div className="h-screen w-full bg-black flex justify-center items-center">
+            Error...
+        </div>
     }
     if (QueryProfile.data) {
-        return <div className="w-full min-h-screen bg-neutral-900 text-white  flex-col flex justify-start items-center pt-24 pb-10">
-            <div className="h-fit w-1/2 rounded-lg space-y-3   bg-neutral-950 p-10">
+        return <div className="w-full min-h-screen bg-neutral-900 text-white  flex-col flex justify-center items-center pt-16 lg:pt-24 lg:pb-10">
+            <div className="h-fit lg:w-2/3 xl:w-1/2 w-full rounded-lg space-y-3   bg-neutral-950 p-10">
                 <div className="flex justify-start items-center">
                     <Avatar >
                         <AvatarImage className="rounded-full h-16 w-16" src="https://github.com/shadcn.png" />

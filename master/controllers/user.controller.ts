@@ -138,7 +138,10 @@ export async function UserProfile(req: Request, res: Response) {
                     }
                 }
             },
-            take: 5
+            take: 5,
+            orderBy: {
+                createdAt: "desc"
+            }
         })
         res.json({
             success: true,

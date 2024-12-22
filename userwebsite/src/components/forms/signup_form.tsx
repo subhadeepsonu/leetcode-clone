@@ -55,7 +55,7 @@ export default function SignUpForm() {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(() => MuatateSignup.mutate()
-            )} className="w-96 space-y-6 border-2 p-6 backdrop-blur-sm bg-white/10 rounded-lg border-gray-400">
+            )} className="md:w-96 w-80 space-y-6 border-2 p-6 backdrop-blur-sm bg-white/10 rounded-lg border-gray-400">
                 <p className="text-center text-3xl font-bold">Register</p>
                 <FormField
                     control={form.control}

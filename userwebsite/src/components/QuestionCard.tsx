@@ -29,7 +29,7 @@ export default function QuestionCard(props: {
             <p className="text-xl font-semibold">{props.num}</p>
             <p className="text-xl font-semibold">. {props.question}</p>
         </div>
-        <p className="text-gray-300">{props.description}.</p>
+        <p className="text-gray-300 truncate text-ellipsis w-full">{props.description}.</p>
         <Badge className={`absolute top-5 right-5  bg-${difficulty}-500 `}>{props.difficulty}</Badge>
     </div>
 }

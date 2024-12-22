@@ -57,7 +57,7 @@ export default function LoginForm() {
 
     return (
         <Form  {...form}>
-            <form onSubmit={form.handleSubmit(() => MuatateLogin.mutate())} className="w-96 space-y-6 border-2  p-6 backdrop-blur-sm bg-white/10 rounded-lg border-gray-400">
+            <form onSubmit={form.handleSubmit(() => MuatateLogin.mutate())} className="md:w-96 w-80 space-y-6 border-2  p-6 backdrop-blur-sm bg-white/10 rounded-lg border-gray-400">
                 <p className="text-center text-3xl font-bold">Login</p>
                 <FormField
                     control={form.control}

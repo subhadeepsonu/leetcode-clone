@@ -30,7 +30,7 @@ model questions {
   sampleInput2 String @default("")
   sampleOutput1 String @default("")
   sampleOutput2 String @default("")
-  tags tags[]
+  tags tags[] 
   submissions submissions[]
   testcases testcases[]
 }
@@ -50,7 +50,7 @@ model testcases {
   input String
   output String
   questionId String
-  question questions @relation(fields: [questionId], references: [id])
+  question questions @relation(fields: [questionId], references: [id],onDelete: Cascade) 
 }
 
 model submissions {
@@ -65,7 +65,7 @@ model submissions {
   correct Boolean?
   completed Boolean @default(false) 
   createdAt DateTime @default(now())
-  question questions @relation(fields: [questionId], references: [id])
+  question questions @relation(fields: [questionId], references: [id],onDelete: Cascade)
   user user @relation(fields: [userId], references: [id])
 }
 

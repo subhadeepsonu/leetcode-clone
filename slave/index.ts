@@ -20,14 +20,13 @@ async function slave() {
 
                 await Promise.all(
                     recived_body.testcases.map(async (testcase: any) => {
-                        let code = "const input=require('fs').readFileSync('/dev/stdin').toString().trim();const [a, b] = input.split(',').map(Number);" + recived_body.code
+                        let code = "const input=require('fs').readFileSync('/dev/stdin').toString().trim();const [a, b] = input.split(',');" + recived_body.code
                         const body = {
                             language_id: parseInt(recived_body.langId),
                             source_code: code,
                             stdin: testcase.input,
                             expected_output: testcase.output,
                         };
-
                         try {
                             const response = await axios.post("http://3.110.188.231:2358/submissions", body, {
                                 headers: {
@@ -36,6 +35,7 @@ async function slave() {
                             });
                             await new Promise(resolve => setTimeout(resolve, 2000));
                             const resposne2 = await axios.get(`http://3.110.188.231:2358/submissions/${response.data.token}`);
+                            console.log(resposne2.data)
                             if (resposne2.data.status.description === "Accepted") {
                                 result.passedCases += 1;
                             } else {
@@ -49,14 +49,13 @@ async function slave() {
                 );
                 result.correct = (result.passedCases == result.totalCases) ? true : false
                 try {
-                    const response = await axios.put(`http://localhost:3000/api/v1/submission/${recived_body.submissionId}`, {
+                    await axios.put(`http://localhost:3000/api/v1/submission/${recived_body.submissionId}`, {
                         passedcases: result.passedCases,
                         failedcases: result.failedCases,
                         totalcases: result.totalCases,
                         correct: result.correct,
                         userId: recived_body.userId
                     });
-                    console.log(response.data)
                 } catch (err: any) {
                     console.error("Error updating submission result:", err.response?.data || err.message || err);
                 }
